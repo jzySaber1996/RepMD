@@ -1,8 +1,8 @@
-# README for RepMD
+# RepMD: An Ever-shifting Harmful Meme Detector
 
-- Summary: This is the replicable package for RepMD.
-- Paper Name: "All Changes May Have Invariant Principles: Improving Ever-Shifting Harmful Meme Detection via Design Concept Reproduction"
-- Submission: ARR Jan, 2026
+- **Summary:** This is the replicable package for RepMD.
+- **Paper Name:** "All Changes May Have Invariant Principles: Improving Ever-Shifting Harmful Meme Detection via Design Concept Reproduction"
+- **Submission:** ARR Jan, 2026
 
 ## Abstract
 
@@ -13,5 +13,8 @@ Harmful memes are ever-shifting in the Internet communities, which are difficult
 
 _**Due to the confidentiality review requirements of specific political entities involved in the paper, we will gradually the disclosure of the complete code.**_
 
-- **[Code](/code/):** Availble code for the replication (part of it remains close-source and need to be gone through the confidentiality review).
-- **[Dataset](/dataset/):** Dataset with two sources (part of it remains close-source and need to be gone through the confidentiality review).
+- **[Code](code/):** Availble code for the replication (part of it remains close-source and need to be gone through the confidentiality review).
+- **[Dataset](dataset/):** Dataset with two sources (part of it remains close-source and need to be gone through the confidentiality review).
+
+## Performance
+
