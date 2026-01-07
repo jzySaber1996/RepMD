@@ -129,13 +129,13 @@ class FilteringRuleApplication:
         return response  # just a placeholder
 
     def ocr_fig_text_info_detection(self, file_path):
-        with open("/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/rule_path_2025-10-11 18:09:31/single_elem_rules.jsonl",
+        with open("/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/rule_path_2025-10-11 18:09:31/single_elem_rules.jsonl",
                   'r', encoding='utf-8') as fin:
             data_dict = json.load(fin)
         single_rule_keys = data_dict.keys()
         # 读取图像
-        # fig_path = "/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/train/no_126.jpg"
-        # image = cv2.imread('/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/train/no_126.jpg')
+        # fig_path = "/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/train/no_126.jpg"
+        # image = cv2.imread('/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/train/no_126.jpg')
         # 使用OCR检测文本
         file_test_data = []
         with open(file_path, 'r', encoding='utf-8') as fin:
@@ -143,7 +143,7 @@ class FilteringRuleApplication:
                 file_test_data.append(json.loads(line))
         for test_data_item in file_test_data:
             img_name = test_data_item["img"]
-            fig_path = f"/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/{img_name}"
+            fig_path = f"/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/{img_name}"
             image = Image.open(image_path).convert('RGB')
             text_input_item = "请分析下列图片中，是否有包含风险数据信息。"
             response_risk_detection = self.model_predict(text_input_item, image)
@@ -210,4 +210,4 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     filter_rule_application = FilteringRuleApplication(args)
-    filter_rule_application.ocr_fig_text_info_detection("/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/test.jsonl")
+    filter_rule_application.ocr_fig_text_info_detection("/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/test.jsonl")

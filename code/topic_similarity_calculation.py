@@ -10,7 +10,7 @@ import re
 # 下载必要的NLTK数据（如果尚未下载）
 # nltk.download('stopwords', quiet=True)
 
-nltk.data.find('/newdisk/public/JZY/punkt_tab/english')
+nltk.data.find('/punkt_tab/english')
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:

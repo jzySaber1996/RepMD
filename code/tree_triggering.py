@@ -384,7 +384,7 @@ class MemesTree:
     def save_to_json(self, save_addr, encoding="utf-8"):
         self.memes_tree.save_to_json(save_addr, encoding)
         # self.memes_tree.save_to_json(
-        #     "/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/meme_risk_triggered_module_tree_llm_v1.json")
+        #     "/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/meme_risk_triggered_module_tree_llm_v1.json")
 
 
 # 示例使用
@@ -393,7 +393,7 @@ if __name__ == "__main__":
     memes_tree = MemesTree()
     memes_tree.check_tree()
 
-    with open('/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/test_tree_updated.txt', 'r', encoding='utf8') as fin:
+    with open('/CVPR_Competition/Auto_Risk_Triggering_Extraction/test_tree_updated.txt', 'r', encoding='utf8') as fin:
         update_content_reads = fin.readlines()
         fin.close()
     print(update_content_reads)
@@ -417,10 +417,10 @@ if __name__ == "__main__":
     family_tree.traverse_bfs(action=lambda node: print(f"Visiting: {node.id}"))
 
     # 保存到文件
-    family_tree.save_to_json("/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/memes_risk_triggered_tree_v2.json")
+    family_tree.save_to_json("/CVPR_Competition/Auto_Risk_Triggering_Extraction/memes_risk_triggered_tree_v2.json")
 
     # 从文件加载
-    loaded_tree = Tree.load_from_json("/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/memes_risk_triggered_tree_v2.json")
+    loaded_tree = Tree.load_from_json("/CVPR_Competition/Auto_Risk_Triggering_Extraction/memes_risk_triggered_tree_v2.json")
     print("\n加载后的树结构:")
     loaded_tree.traverse_bfs(action=lambda node: print(f"Loaded: {node.id}"))
 

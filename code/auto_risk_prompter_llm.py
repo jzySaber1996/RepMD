@@ -80,7 +80,7 @@ class AutoPromptTuner:
         """
         predictions = []
         # list_res = []
-        # with open('/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/train.jsonl', 'r',
+        # with open('/Dataset-FHM/train.jsonl', 'r',
         #           encoding='utf-8') as fin:
         #     for line in fin:
         #         data_dict = json.loads(line)
@@ -111,7 +111,7 @@ class AutoPromptTuner:
             # data_index_replaced = date_index_item.replace('月','-').replace('日','')
             img_name_item = date_index_item['img']
             img_name_item_replaced = img_name_item.split('\/')[-1]
-            image_path = f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/{img_name_item_replaced}'
+            image_path = f'/Dataset-FHM/{img_name_item_replaced}'
             base64_image = encode_image(image_path)
             response_risk_detection = self.model_predict(text_input_item, base64_image)
             # 存储预测结果数据
@@ -137,7 +137,7 @@ class AutoPromptTuner:
                                           'Failed_Item_Img': failed_img_name_list}
                     df_output_failed = pd.DataFrame(output_failed_dict)
                     df_output_failed.to_csv(
-                        f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/Doubao_Bad_Cases/failed_test_seen_examples_memes_{time_str}.csv',
+                        f'/Dataset-FHM/Doubao_Bad_Cases/failed_test_seen_examples_memes_{time_str}.csv',
                         index=False)
             # det_pre = (1.0 * count_match) / count_total
             # loop_find_calling.set_postfix(count_match=count_match, count_total=count_total, precision=det_pre)
@@ -171,7 +171,7 @@ class AutoPromptTuner:
 
     def evaluation(self):
         list_res = []
-        with open('/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/dev.jsonl', 'r',
+        with open('/Dataset-FHM/dev.jsonl', 'r',
                   encoding='utf-8') as fin:
             for line in fin:
                 data_dict = json.loads(line)
@@ -211,7 +211,7 @@ class AutoPromptTuner:
                 # data_index_replaced = date_index_item.replace('月','-').replace('日','')
                 img_name_item = date_index_item['img']
                 img_name_item_replaced = img_name_item.split('\/')[-1]
-                image_path = f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/{img_name_item_replaced}'
+                image_path = f'/Dataset-FHM/{img_name_item_replaced}'
                 base64_image = encode_image(image_path)
 
                 response = self.client.chat.completions.create(
@@ -254,7 +254,7 @@ class AutoPromptTuner:
                                           'Failed_Item_Img': failed_img_name_list}
                     df_output_failed = pd.DataFrame(output_failed_dict)
                     df_output_failed.to_csv(
-                        f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/Doubao_Bad_Cases/failed_dev_examples_memes_{time_str}.csv',
+                        f'/Dataset-FHM/Doubao_Bad_Cases/failed_dev_examples_memes_{time_str}.csv',
                         index=False)
                 det_pre = (1.0 * count_match) / count_total
                 loop_find_calling.set_postfix(pred_res=pred_res, label_res=label_res, count_match=count_match, count_total=count_total, acc=det_pre)
@@ -267,11 +267,11 @@ class AutoPromptTuner:
         # 基本训练数据的加载
         current_time = datetime.now()
         time_str = current_time.strftime("%Y-%m-%d %H:%M:%S")
-        prompt_update_dir_path = os.path.join("/newdisk/public/JZY/CVPR_Competition/prompts/", f"update_prompt_{time_str}")
+        prompt_update_dir_path = os.path.join("/CVPR_Competition/prompts/", f"update_prompt_{time_str}")
         if not os.path.exists(prompt_update_dir_path):
             os.makedirs(prompt_update_dir_path)
         list_res = []
-        with open('/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/train.jsonl', 'r',
+        with open('/Dataset-FHM/train.jsonl', 'r',
                   encoding='utf-8') as fin:
             for line in fin:
                 data_dict = json.loads(line)
@@ -329,7 +329,7 @@ class AutoPromptTuner:
                 self.prompt = new_prompt_text
                 if count_steps % eval_steps == 0:
                     # list_res_eval = []
-                    # with open('/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/dev.jsonl', 'r',
+                    # with open('/Dataset-FHM/dev.jsonl', 'r',
                     #           encoding='utf-8') as fin:
                     #     for line in fin:
                     #         data_dict_eval = json.loads(line)
@@ -373,9 +373,9 @@ if __name__ == "__main__":
     true_labels = ['Yes', 'No']  # 真实标签
 
     # 实例化调优器并执行自动调优
-    tuner = AutoPromptTuner(initial_prompt_dir="/newdisk/public/JZY/CVPR_Competition/prompts/prompt_0/",
+    tuner = AutoPromptTuner(initial_prompt_dir="/CVPR_Competition/prompts/prompt_0/",
                             prompt_filename="prompt_risk_detection.txt",
-                            update_prompt_file="/newdisk/public/JZY/CVPR_Competition/prompts/analyze_issues_prompt.txt")
+                            update_prompt_file="/CVPR_Competition/prompts/analyze_issues_prompt.txt")
     # tuner.auto_prompt_tune(image_descriptions, true_labels, rounds=10)
     tuner.auto_prompt_tune()
     # print(prompt)

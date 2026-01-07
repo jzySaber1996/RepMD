@@ -396,13 +396,13 @@ class EnhancedMemeRiskGraphBuilder:
 def main():
     # 原始树数据（开源FHM数据集）
     # tree_file_name = "meme_risk_triggered_module_tree_llm_2025-08-21 15:31:56.json"
-    # with open(f"/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/{tree_file_name}", "r", encoding="utf-8") as f:
+    # with open(f"/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/{tree_file_name}", "r", encoding="utf-8") as f:
     #     tree_data = json.load(f)
 
     # 台州公安数据
     tree_file_name = "tzga_meme_risk_triggered_module_tree_llm_2025-10-10 17:59:29.json"
     with open(
-            f"/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/{tree_file_name}",
+            f"/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/{tree_file_name}",
             "r", encoding="utf-8") as f:
         tree_data = json.load(f)
 
@@ -421,10 +421,10 @@ def main():
         print(f"  {key}: {value}")
 
     # 保存为JSON文件（公开FHM数据集）
-    # json_data = builder.to_json(f"/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/Meme_HGraph_FHM/{tree_file_name}")
+    # json_data = builder.to_json(f"/CVPR_Competition/Auto_Risk_Triggering_Extraction/Meme_HGraph_FHM/{tree_file_name}")
 
     # 保存为JSON文件（台州公安数据集）
-    json_data = builder.to_json(f"/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/Meme_Graph_TZGA/{tree_file_name}")
+    json_data = builder.to_json(f"/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/Meme_Graph_TZGA/{tree_file_name}")
 
     print(f"\n图已保存到 enhanced_meme_risk_graph.json")
 

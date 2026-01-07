@@ -78,7 +78,7 @@ class FilteringRuleConstruction:
                 single_elem_rules[res_filtered_item] = [category_content[0]]
         print(single_elem_rules)
         rule_update_path = os.path.join(
-            "/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/",
+            "/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/",
             f"rule_path_{self.time_str}")
         if not os.path.exists(rule_update_path):
             os.makedirs(rule_update_path)
@@ -122,5 +122,5 @@ class FilteringRuleConstruction:
 
 if __name__ == "__main__":
     filter_rule_construct = FilteringRuleConstruction()
-    filter_rule_construct.read_graph_and_rule_construction("/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/Meme_Graph_TZGA/tzga_meme_risk_triggered_module_tree_llm_2025-10-10 17:59:29.json")
-    # filter_rule_construct.ocr_fig_text_info_detection("/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/test.jsonl")
+    filter_rule_construct.read_graph_and_rule_construction("/CVPR_Competition/Auto_Risk_Triggering_Extraction/TZGA_Deployment/Meme_Graph_TZGA/tzga_meme_risk_triggered_module_tree_llm_2025-10-10 17:59:29.json")
+    # filter_rule_construct.ocr_fig_text_info_detection("/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/test.jsonl")

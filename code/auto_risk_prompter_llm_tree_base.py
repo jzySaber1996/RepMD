@@ -160,8 +160,8 @@ class AutoPromptTuner:
             # data_index_replaced = date_index_item.replace('月','-').replace('日','')
             img_name_item = date_index_item['img']
             img_name_item_replaced = img_name_item.split('\/')[-1]
-            image_path = f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/{img_name_item_replaced}'
-            # image_path = f'/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/{img_name_item_replaced}'
+            image_path = f'/Dataset-FHM/{img_name_item_replaced}'
+            # image_path = f'/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/{img_name_item_replaced}'
             base64_image = self.encode_image(image_path)
             # image = Image.open(image_path).convert('RGB')
             response_risk_detection = self.model_predict(text_input_item, base64_image)
@@ -190,7 +190,7 @@ class AutoPromptTuner:
                                           'Failed_Item_Img': failed_img_name_list}
                     df_output_failed = pd.DataFrame(output_failed_dict)
                     df_output_failed.to_csv(
-                        f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/Doubao_Bad_Cases/failed_test_seen_examples_memes_{self.time_str}.csv',
+                        f'/Dataset-FHM/Doubao_Bad_Cases/failed_test_seen_examples_memes_{self.time_str}.csv',
                         index=False)
             # det_pre = (1.0 * count_match) / count_total
             # loop_find_calling.set_postfix(count_match=count_match, count_total=count_total, precision=det_pre)
@@ -283,8 +283,8 @@ class AutoPromptTuner:
         # data_index_replaced = date_index_item.replace('月','-').replace('日','')
         img_name_item = date_index_item['img']
         img_name_item_replaced = img_name_item.split('\/')[-1]
-        image_path = f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/{img_name_item_replaced}'
-        # image_path = f'/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/{img_name_item_replaced}'
+        image_path = f'/Dataset-FHM/{img_name_item_replaced}'
+        # image_path = f'/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/{img_name_item_replaced}'
 
         # image = Image.open(image_path).convert('RGB')
         base64_image = self.encode_image(image_path)
@@ -361,7 +361,7 @@ class AutoPromptTuner:
 
     def evaluation(self, iter_num):
         list_res = []
-        with open('/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/dev.jsonl', 'r',
+        with open('/Dataset-FHM/dev.jsonl', 'r',
                   encoding='utf-8') as fin:
             for line in fin:
                 data_dict = json.loads(line)
@@ -443,7 +443,7 @@ class AutoPromptTuner:
                                       'Failed_Item_Img': failed_img_name_list}
                 df_output_failed = pd.DataFrame(output_failed_dict)
                 df_output_failed.to_csv(
-                    f'/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/Doubao_Bad_Cases/failed_dev_examples_memes_{self.time_str}.csv',
+                    f'/Dataset-FHM/Doubao_Bad_Cases/failed_dev_examples_memes_{self.time_str}.csv',
                     index=False)
 
             # loop_find_calling.set_postfix(pred_res=pred_res, label_res=label_res, count_match=count_match,
@@ -457,7 +457,7 @@ class AutoPromptTuner:
         self.precision.append(det_pre)
         self.recall.append(det_rec)
         self.f1.append(det_f1)
-        with open(f"/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/Results_FHM/results_logs_meme_risk_triggered_module_tree_llm_{self.time_str}.txt", "w", encoding='utf8') as f_res_out:
+        with open(f"/CVPR_Competition/Auto_Risk_Triggering_Extraction/Results_FHM/results_logs_meme_risk_triggered_module_tree_llm_{self.time_str}.txt", "w", encoding='utf8') as f_res_out:
             for iter_num_item, det_acc_item, det_pre_item, det_rec_item, det_f1_item in zip(self.iteration, self.accuracy, self.precision, self.recall, self.f1):
                 f_res_out.write(f"Iteration: {iter_num_item}, Accuracy: {det_acc_item}, Precision: {det_pre_item}, Recall: {det_rec_item}, F1: {det_f1_item}\n")
             f_res_out.close()
@@ -467,15 +467,15 @@ class AutoPromptTuner:
         自动调优提示，经过指定的轮次预测和真实标签对比，根据表现决定是否更新prompt。
         """
         # 基本训练数据的加载
-        prompt_update_dir_path = os.path.join("/newdisk/public/JZY/CVPR_Competition/prompts/",
+        prompt_update_dir_path = os.path.join("/CVPR_Competition/prompts/",
                                               f"update_prompt_{self.time_str}")
         if not os.path.exists(prompt_update_dir_path):
             os.makedirs(prompt_update_dir_path)
         list_res = []
-        # with open("/newdisk/public/JZY/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/train.jsonl", 'r',
+        # with open("/Harmful_Dataset/huzhouga_harmful_dataset/Dataset/train.jsonl", 'r',
         #           encoding='utf-8') as fin:
 
-        with open('/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/train.jsonl', 'r',
+        with open('/Dataset-FHM/train.jsonl', 'r',
                   encoding='utf-8') as fin:
             for line in fin:
                 data_dict = json.loads(line)
@@ -509,12 +509,12 @@ class AutoPromptTuner:
                     for reason_item in reason_list:
                         self.memes_tree.update_tree(reason_item)
                     self.memes_tree.save_to_json(
-                        f"/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/meme_risk_triggered_module_tree_llm_{self.time_str}.json")
+                        f"/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/meme_risk_triggered_module_tree_llm_{self.time_str}.json")
                     system_cmd = "You are an analyzer for the memes' risks."
                     dpsk_calling = DPSKCalling()
                     # print("-----Print the MemeTree's Data-----\n")
                     tree_json_data = ""
-                    addr_json_tree = f"/newdisk/public/JZY/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/meme_risk_triggered_module_tree_llm_{self.time_str}.json"
+                    addr_json_tree = f"/CVPR_Competition/Auto_Risk_Triggering_Extraction/MemeTriggerTree_FHM/meme_risk_triggered_module_tree_llm_{self.time_str}.json"
 
                     with open(addr_json_tree, "r", encoding='utf8') as json_tree_in:
                         tree_json_data = json.load(json_tree_in)
@@ -531,7 +531,7 @@ class AutoPromptTuner:
                     #                           f"..."
                     #                           f"Suggestion N： xxx.")
 
-                    with open("/newdisk/public/JZY/CVPR_Competition/prompts/suggestions.txt", "r", encoding="utf-8") as f_suggestion:
+                    with open("/CVPR_Competition/prompts/suggestions.txt", "r", encoding="utf-8") as f_suggestion:
                         prompt_update_original = f_suggestion.read().strip()
                     # print("-----End of  the MemeTree's Data-----\n")
                     prompt_update_original = prompt_update_original.format(TREE_JSON_DATA=tree_json_data)
@@ -578,7 +578,7 @@ class AutoPromptTuner:
                 # if count_steps % eval_steps == 0:
                     # or count_steps == 1
                     # list_res_eval = []
-                    # with open('/newdisk/public/JZY/CVPR_Competition/fudan_vlux_V1/Dataset-FHM/dev.jsonl', 'r',
+                    # with open('/Dataset-FHM/dev.jsonl', 'r',
                     #           encoding='utf-8') as fin:
                     #     for line in fin:
                     #         data_dict_eval = json.loads(line)
@@ -669,10 +669,10 @@ def main():
     true_labels = ['Yes', 'No']  # 真实标签
 
     # 实例化调优器并执行自动调优
-    tuner = AutoPromptTuner(initial_prompt_dir="/newdisk/public/JZY/CVPR_Competition/prompts/prompt_0/",
+    tuner = AutoPromptTuner(initial_prompt_dir="/CVPR_Competition/prompts/prompt_0/",
                             prompt_filename="prompt_risk_detection_tree_optimization_v0.txt",
                             prompt_suggestion_enhance_filename="suggestion_for_RAG.txt",
-                            update_prompt_file="/newdisk/public/JZY/CVPR_Competition/prompts/summarize_issue_prompt.txt",
+                            update_prompt_file="/CVPR_Competition/prompts/summarize_issue_prompt.txt",
                             args=args)
     # tuner.auto_prompt_tune(image_descriptions, true_labels, rounds=10)
     tuner.auto_prompt_tune()
